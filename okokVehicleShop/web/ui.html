@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="UTF-8">
+	<head>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet">
+		<link href="styles.css" rel="stylesheet">
+	</head>
+
+	<body>
+		<div class="vehicle_shop">
+			<div class="vehicle_info">
+				<div class="vehicle_brand">
+					<span id="vehicle_brand">BENTLEY</span>
+				</div>
+				<div class="vehicle_model">
+					<span class="out">
+						<span class="in" id="vehicle_model">CONTINENTAL GT</span>
+					</span>
+				</div>
+				<div class="vehicle_price">
+					<span id="vehicle_price">980.000€</span>
+				</div>
+				<div class="choosecolor_title">Choose a color:</div>
+				<div class="color_palette">
+					<div class="row">
+						<div class="color" id="color1"></div>
+						<div class="color" id="color2"></div>
+						<div class="color" id="color3"></div>
+						<div class="color" id="color4"></div>
+						<div class="color" id="color5"></div>
+					</div>
+					<div class="row" style="margin-top: 7px;">
+						<div class="color" id="color6"></div>
+						<div class="color" id="color7"></div>
+						<div class="color" id="color8"></div>
+						<div class="color" id="color9"></div>
+						<div class="color" id="color10"></div>
+					</div>
+				</div>
+				<div class="btns">
+					<button type="button" id="buyVehicle" class="btn btn-blue btns-buy" data-bs-toggle="modal" data-bs-target="#confirmPurchaseModal"><i class="fas fa-shopping-cart"></i> BUY</button>
+					<button type="button" id="testVehicle" class="btn btn-white btns-test"><i class="fas fa-play"></i> TEST</button>
+				</div>
+			</div>
+
+			<div class="vehicle_stats">
+				<div>
+					<div class="vehicle_stats_title">MAX SPEED</div>
+					<div class="progress">
+						<div class="progress-value1"></div>
+					</div>
+				</div>
+				<div>
+					<div class="vehicle_stats_title">ACCELERATION</div>
+					<div class="progress">
+						<div class="progress-value2"></div>
+					</div>
+				</div>
+				<div>
+					<div class="vehicle_stats_title">BRAKING</div>
+					<div class="progress">
+						<div class="progress-value3"></div>
+					</div>
+				</div>
+				<div>
+					<div class="vehicle_stats_title">HANDLING</div>
+					<div class="progress">
+						<div class="progress-value4"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="d-flex justify-content-center align-items-center">
+				<div id="vehicle-catalog_slider">
+					<div id="slider">
+						<div id="slide">
+						</div>
+					</div>
+				</div>
+				<div id="placer">
+					<div id="next-button"><i class="fas fa-chevron-right"></i></div>
+					<div id="previous-button"><i class="fas fa-chevron-left"></i></div>
+					<div id="goback-button"><i class="fas fa-arrow-left"></i></div>
+					<div id="exit-button"><i class="fas fa-times"></i></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="vehicle_menu">
+			<div class="card main_card">
+				<div class="card-body main_card-body">
+					<div class="row h-100" id="menu">
+						<div class="col-md-2 d-flex flex-column sidebar-cont">
+							<img src="img/logo.png" class="logo">
+							<hr>
+							<span class="sidebar-title">Menu</span>
+							<div id="sidebar">
+								<p class="sidebar-item mt-2 selected" id="overview_page"><i class="bi bi-grid-1x2-fill"></i> <span class="ms-1">Overview</span></p>
+								<p class="sidebar-item" id="ads_page"><i class="fas fa-book-open"></i> <span class="ms-1">Catalog</span></p>
+								<p class="sidebar-item" id="stock_page"><i class="fas fa-box"></i> <span class="ms-1">Stock</span></p>
+								<p class="sidebar-item" id="pricetable_page"><i class="fas fa-tags"></i> <span class="ms-1">Price Table</span></p>
+								<p class="sidebar-item" id="saleshistory_page"><i class="fas fa-chart-bar"></i> <span class="ms-1">Sales History</span></p>
+								<p class="sidebar-item" id="employees_page"><i class="fas fa-user-friends"></i> <span class="ms-1">Employees</span></p>
+								<p class="sidebar-item" id="missions_page"><i class="fas fa-map-marked-alt"></i> <span class="ms-1">Missions</span></p>
+							</div>
+							<p class="sidebar-item logout mt-auto" id="logout-btn"><i class="fas fa-sign-out-alt"></i></i> <span class="ms-1">Logout</span></p>
+						</div>
+						<div class="col-md-10 section">
+							<div class="d-flex justify-content-between align-items-center header-height" id="top_bar">
+							</div>
+							<hr>
+							<div class="d-flex flex-column flex-grow-1 page-cont" id="center_infos">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="loading_menu">
+			<div class="card main_card">
+				<div class="card-body main_card-body">
+					<div class="row h-100" id="menu">
+						<div class="d-flex justify-content-center flex-column align-items-center">
+							<span class="load"></span>
+							<br>
+							<div class="loadingtxt">Loading Data...</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="logout_menu">
+			<div class="card main_card">
+				<div class="card-body main_card-body">
+					<div class="row h-100" id="menu">
+						<div class="d-flex justify-content-center flex-column align-items-center">
+							<span class="load"></span>
+							<br>
+							<div class="loadingtxt">Logging out...</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Deposit Modal -->
+		<div class="modal fade" id="depositModal" tabindex="-1">
+			<div class="modal-dialog modal-dialog-centered" style="width: 400px;">
+				<div class="modal-content myinvoices_modal-content">
+					<div class="modal-body p-4 text-center">
+						<span class="modal-title">Deposit Money</span>
+						<hr>
+						<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" id="closeDepositMoneyModal"></button>
+						<div class="d-flex justify-content-center flex-column">
+							<input type="number" id="deposit_value" class="form-control flex-grow-1 text-center" placeholder="Amount" onkeyup="checkIfEmpty()">
+							<button type="button" id="depositMoneyButton" class="btn btn-blue flex-grow-1 modal-btn" data-bs-toggle="modal" data-bs-target="#depositModal"><i class="bi bi-upload"></i> DEPOSIT</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Withdraw Modal -->
+		<div class="modal fade" id="withdrawModal" tabindex="-1">
+			<div class="modal-dialog modal-dialog-centered" style="width: 400px;">
+				<div class="modal-content myinvoices_modal-content">
+					<div class="modal-body p-4 text-center">
+						<span class="modal-title">Withdraw Money</span>
+						<hr>
+						<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" id="closeWithdrawMoneyModal"></button>
+						<div class="d-flex justify-content-center flex-column">
+							<input type="number" id="withdraw_value" class="form-control flex-grow-1 text-center" placeholder="Amount" onkeyup="checkIfEmpty()">
+							<button type="button" id="withdrawMoneyButton" class="btn btn-blue flex-grow-1 modal-btn" data-bs-toggle="modal" data-bs-target="#withdrawModal"><i class="bi bi-download"></i> WITHDRAW</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Place Ad Modal -->
+		<div class="modal fade" id="placeAdModal" tabindex="-1">
+			<div class="modal-dialog modal-dialog-centered" style="width: 400px;">
+				<div class="modal-content myinvoices_modal-content">
+					<div class="modal-body p-4 text-center">
+						<div class="modal-title">Place an Ad</div>
+						<hr>
+						<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" id="closePlaceAdModal"></button>
+						<select id="dropdown" class="form-select form-select-lg">
+							<option value="1">oi1</option>
+							<option value="2">oi2</option>
+						</select>
+						<input type="number" id="placead_amount" class="form-control flex-grow-1 text-center" placeholder="Amount" style="margin-top: 10px;" onkeyup="checkIfEmpty()">
+						<div class="d-flex justify-content-center flex-column">
+							<button type="button" id="confirmPlaceAd" class="btn btn-blue flex-grow-1 modal-btn" data-bs-toggle="modal" data-bs-target="#placeAdModal"><i class="fas fa-plus"></i> PLACE AD</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Hire Employee Modal -->
+		<div class="modal fade" id="hireEmployeeModal" tabindex="-1">
+			<div class="modal-dialog modal-dialog-centered" style="width: 400px;">
+				<div class="modal-content myinvoices_modal-content">
+					<div class="modal-body p-4 text-center">
+						<div class="modal-title">Hire Employee</div>
+						<hr>
+						<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" id="closeHireEmployeeModal"></button>
+						<select id="dropdown_to_hire" class="form-select form-select-lg">
+							<option value="1">Loading...</option>
+						</select>
+						<div class="d-flex justify-content-center flex-column">
+							<button type="button" id="confirmHireEmployee" class="btn btn-blue flex-grow-1 modal-btn" data-bs-toggle="modal" data-bs-target="#hireEmployeeModal" data-bs-dismiss="modal"><i class="fas fa-plus"></i> Hire</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="leavebusiness_modal" tabindex="-1">
+			<div class="modal-dialog modal-lg modal-dialog-centered" style="width: 500px;">
+				<div class="modal-content myinvoices_modal-content">
+					<div class="modal-body p-4">
+						<div class="text-center">
+							<span class="modal-title">Are you sure?</span>
+						</div>
+						<hr>
+						<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" id="closeDepositMoneyModal"></button>
+						<div class="text-center modal-title" style="font-weight: 500;">Do you want to quit the job?</div>
+						<div class="d-flex justify-content-center align-items-center" style="margin-top: 10px;">
+							<a id="cancelAction" href="#" class="btn btn-dark d-block w-50" style="border-radius: 10px; font-size: 30px; margin-right: 15px;" data-bs-dismiss="modal"><i class="fas fa-times"></i> CANCEL</a>
+							<a id="leavebusiness_btn_modal" href="#" class="btn btn-blue d-block w-50" style="border-radius: 10px; font-size: 30px;" data-bs-dismiss="modal"><i class="fas fa-door-open"></i> QUIT</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="sellbusiness_modal" tabindex="-1">
+			<div class="modal-dialog modal-lg modal-dialog-centered" style="width: 500px;">
+				<div class="modal-content myinvoices_modal-content">
+					<div class="modal-body p-4">
+						<div class="text-center">
+							<span class="modal-title">Are you sure?</span>
+						</div>
+						<hr>
+						<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" id="closeDepositMoneyModal"></button>
+						<div class="text-center modal-title" style="font-weight: 500;">Do you want to sell the business for <span id="sellbusiness-price">0</span>€?</div>
+						<div class="d-flex justify-content-center align-items-center" style="margin-top: 10px;">
+							<a id="cancelAction" href="#" class="btn btn-dark d-block w-50" style="border-radius: 10px; font-size: 30px; margin-right: 15px;" data-bs-dismiss="modal"><i class="fas fa-times"></i> CANCEL</a>
+							<a id="sellbusiness_btn_modal" href="#" class="btn btn-blue d-block w-50" style="border-radius: 10px; font-size: 30px;" data-bs-dismiss="modal"><i class="fas fa-shopping-cart"></i> SELL</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="addVehicleModal" tabindex="-1">
+			<div class="modal-dialog modal-lg modal-dialog-centered">
+				<div class="modal-content myinvoices_modal-content">
+					<div class="modal-body p-4">
+						<div class="text-center">
+							<span class="modal-title">Add Vehicle</span>
+						</div>
+						<hr>
+						<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" id="closeAddVehicleModal"></button>
+						<div class="row d-flex justify-content-center">
+							<div class="col-md-6" style="border-right: 1px solid #3e3f4b;">
+								<label class="modal-title-addveh">Vehicle ID</label>
+								<input type="text" id="addvehicle_vehicleid" class="form-control flex-grow-1" placeholder="zentorno" onkeyup="checkIfEmpty()">
+								<label class="modal-title-addveh" style="margin-top: 15px;">Vehicle Name</label>
+								<input type="text" id="addvehicle_vehiclename" class="form-control flex-grow-1" placeholder="Zentorno" onkeyup="checkIfEmpty()">
+								<label class="modal-title-addveh" style="margin-top: 15px;">Type</label>
+								<select id="dropdown_type" class="form-select form-select-lg" onChange="checkIfEmpty()">
+									<option value="1">Select an option</option>
+								</select>
+							</div>
+							<div class="col-md-6">
+								<label class="modal-title-addveh">Category</label>
+								<select id="dropdown_categories" class="form-select form-select-lg" onChange="checkIfEmpty()">
+									<option value="1">Select an option</option>
+								</select>
+								<label class="modal-title-addveh" style="margin-top: 15px;">Min. Price</label>
+								<input type="number" id="addvehicle_minprice" class="form-control flex-grow-1" placeholder="1000" onkeyup="checkIfEmpty()">
+								<label class="modal-title-addveh" style="margin-top: 15px;">Max. Price</label>
+								<input type="number" id="addvehicle_maxprice" class="form-control flex-grow-1" placeholder="5000" onkeyup="checkIfEmpty()">
+
+							</div>
+						</div>
+						<div class="d-flex justify-content-center flex-column">
+							<button type="button" id="confirmAddVehicle" class="btn btn-blue flex-grow-1 modal-btn" data-bs-toggle="modal" data-bs-target="#addVehicleModal" disabled><i class="fas fa-plus"></i> ADD VEHICLE</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="buybusiness_modal" tabindex="-1">
+			<div class="modal-dialog modal-lg modal-dialog-centered" style="width: 500px;">
+				<div class="modal-content myinvoices_modal-content">
+					<div class="modal-body p-4">
+						<div class="text-center">
+							<span class="modal-title">Are you sure?</span>
+						</div>
+						<hr>
+						<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" id="closeDepositMoneyModal"></button>
+						<div class="text-center modal-title" style="font-weight: 500;">Do you want to buy <span id="shop_name">the business</span> for <span id="shop_price">1.000€</span>?</div>
+						<div class="d-flex justify-content-center align-items-center" style="margin-top: 10px;">
+							<a id="cancelAction" href="#" class="btn btn-dark d-block w-50" style="border-radius: 10px; font-size: 30px; margin-right: 15px;" data-bs-dismiss="modal"><i class="fas fa-times"></i> CANCEL</a>
+							<a id="buybusiness_btn_modal" href="#" class="btn btn-blue d-block w-50" style="border-radius: 10px; font-size: 30px;" data-bs-dismiss="modal"><i class="fas fa-shopping-cart"></i> BUY</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="buyvehicle_modal" tabindex="-1">
+			<div class="modal-dialog modal-lg modal-dialog-centered" style="width: 500px;">
+				<div class="modal-content myinvoices_modal-content">
+					<div class="modal-body p-4">
+						<div class="text-center">
+							<span class="modal-title">Are you sure?</span>
+						</div>
+						<hr>
+						<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" id="closeDepositMoneyModal"></button>
+						<div class="text-center modal-title" style="font-weight: 500;">Do you want to buy <span id="vehicle_name_modal">the business</span> for <span id="vehicle_price_modal">1.000€</span>?</div>
+						<div class="d-flex justify-content-center align-items-center" style="margin-top: 10px;">
+							<a id="cancelAction" href="#" class="btn btn-dark d-block w-50" style="border-radius: 10px; font-size: 30px; margin-right: 15px;" data-bs-dismiss="modal"><i class="fas fa-times"></i> CANCEL</a>
+							<a id="buyvehicle_btn_modal" href="#" class="btn btn-blue d-block w-50" style="border-radius: 10px; font-size: 30px;" data-bs-dismiss="modal"><i class="fas fa-shopping-cart"></i> BUY</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+		<script src="scripts.js" type="text/javascript"></script>
+	</body>
+</html>
